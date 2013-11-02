@@ -1,11 +1,17 @@
 module gollom.command
 
+import gollom.command.impl.not_implemented
+import gollom.command.impl.ping
+import gollom.command.reply
+
 struct Command = { command, args }
 
 augment gollom.command.types.Command {
-  function execute = |this, writer| {
-    println("Command<" + this: command() + ">" + this: args())
+  function execute = |this| {
+    return match {
+      when this: command(): equals("PING") then executePing()
 
-    writer: writeBytes("*-1\r\n")
+      otherwise executeNotImplemented(this: command())
+    }
   }
 }
