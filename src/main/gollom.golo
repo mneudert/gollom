@@ -1,6 +1,6 @@
 module gollom
 
-import gollom.Server
+import gollom.server
 
 function main = |args| {
   let ip   = args: get(0)

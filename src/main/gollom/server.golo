@@ -1,28 +1,29 @@
-module gollom.Server
+module gollom.server
 
 import java.io.BufferedReader
+import java.io.DataOutputStream
 import java.io.InputStreamReader
 import java.lang.Runnable
 import java.lang.Thread
 import java.net.InetSocketAddress
 import java.net.ServerSocket
 
+import gollom.command.handler
+
 struct Server = { ip, port }
 
-augment gollom.Server.types.Server {
+augment gollom.server.types.Server {
   function handle = |this, conn| {
     let reader = BufferedReader(InputStreamReader(conn: getInputStream()))
+    let writer = DataOutputStream(conn: getOutputStream())
 
     try {
-      while(true) {
-        let line = reader: readLine()
+      while not reader: ready() {}
 
-        if line isnt null {
-          println(line)
-        }
-      }
+      CommandHandler(reader, writer): handle()
+      writer: close()
     } catch (e) {
-      # ignore
+      e: printStackTrace()
     }
   }
 
