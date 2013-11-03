@@ -3,6 +3,7 @@ module gollom.command
 import java.lang.IndexOutOfBoundsException
 
 import gollom.command.impl.del
+import gollom.command.impl.exists
 import gollom.command.impl.get
 import gollom.command.impl.not_implemented
 import gollom.command.impl.ping
@@ -15,6 +16,7 @@ function executeCommand = |command, datastore| {
   try {
     return match {
       when command: command(): equals("DEL") then executeDel(command: args(): get(0), datastore)
+      when command: command(): equals("EXISTS") then executeExists(command: args(): get(0), datastore)
       when command: command(): equals("GET") then executeGet(command: args(): get(0), datastore)
       when command: command(): equals("PING") then executePing()
       when command: command(): equals("SET") then executeSet(command: args(): get(0), command: args(): get(1), datastore)
