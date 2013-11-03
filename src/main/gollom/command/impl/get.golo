@@ -5,5 +5,9 @@ import gollom.command.reply
 function executeGet = |key, datastore| {
   let value = datastore: get(key)
 
-  return CommandReply("$" + value: length() + "\r\n" + value)
+  if value is null {
+    return CommandReply("*-1")
+  } else {
+    return CommandReply("$" + value: length() + "\r\n" + value)
+  }
 }
