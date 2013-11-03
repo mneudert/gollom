@@ -10,7 +10,7 @@ import java.net.ServerSocket
 
 import gollom.command.handler
 
-struct Server = { ip, port }
+struct Server = { ip, port, datastore }
 
 augment gollom.server.types.Server {
   function handle = |this, conn| {
@@ -20,7 +20,7 @@ augment gollom.server.types.Server {
     try {
       while not reader: ready() {}
 
-      CommandHandler(reader, writer): handle()
+      CommandHandler(reader, writer): handle(this: datastore())
       writer: close()
     } catch (e) {
       e: printStackTrace()

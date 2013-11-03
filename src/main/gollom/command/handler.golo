@@ -7,10 +7,9 @@ import gollom.command.reply
 struct CommandHandler = { reader, writer }
 
 augment gollom.command.handler.types.CommandHandler {
-  function handle = |this| {
+  function handle = |this, datastore| {
     let command = CommandDecoder(this: reader()): decode()
-    let reply   = command: execute()
 
-    reply: send(this: writer())
+    executeCommand(command, datastore): send(this: writer())
   }
 }
