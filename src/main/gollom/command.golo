@@ -20,7 +20,7 @@ function executeCommand = |command, datastore| {
     let args = command: args()
 
     return match {
-      when command: command(): equals("DEL") then executeDel(args: get(0), datastore)
+      when command: command(): equals("DEL") then executeDel(args, datastore)
       when command: command(): equals("EXISTS") then executeExists(args: get(0), datastore)
       when command: command(): equals("HEXISTS") then executeHexists(args: get(0), args: get(1), datastore)
       when command: command(): equals("HGET") then executeHget(args: get(0), args: get(1), datastore)
