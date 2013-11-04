@@ -11,5 +11,5 @@ function executeDel = |keys, datastore| {
     }
   }
 
-  return CommandReply(":" + deleted)
+  return IntegerReply(deleted)
 }

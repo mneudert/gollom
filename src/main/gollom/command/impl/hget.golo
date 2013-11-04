@@ -6,14 +6,14 @@ function executeHget = |key, field, datastore| {
   let hash = datastore: get(key)
 
   if hash is null {
-    return CommandReply("*-1")
+    return MultiBulkReply(null)
   }
 
   let value = hash: get(field)
 
   if value is null {
-    return CommandReply("*-1")
+    return MultiBulkReply(null)
   } else {
-    return CommandReply("$" + value: length() + "\r\n" + value)
+    return BulkReply(value)
   }
 }

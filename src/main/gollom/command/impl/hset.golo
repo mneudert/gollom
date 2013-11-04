@@ -10,5 +10,5 @@ function executeHset = |key, field, value, datastore| {
   }
 
   println(datastore: get(key))
-  return CommandReply("+OK")
+  return StatusReply("OK")
 }

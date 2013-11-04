@@ -6,8 +6,8 @@ function executeGet = |key, datastore| {
   let value = datastore: get(key)
 
   if value is null {
-    return CommandReply("*-1")
+    return MultiBulkReply(null)
   } else {
-    return CommandReply("$" + value: length() + "\r\n" + value)
+    return BulkReply(value)
   }
 }
