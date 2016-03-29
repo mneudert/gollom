@@ -7,7 +7,5 @@ task :run, :ip, :port do |t, args|
   ip   = args[:ip]   || "127.0.0.1"
   port = args[:port] || 6380
 
-  libs = Dir.glob("src/main/gollom/**/*.golo") * " "
-
-  sh "golo golo --files #{libs} src/main/gollom.golo --args #{ip} #{port}"
+  sh "golo golo --files src/ --module gollom --args #{ip} #{port}"
 end
