@@ -14,7 +14,7 @@ Start using rake:
     rake run
 
     # or pass ip/port
-    rake run["127.0.0.1", 6380]
+    rake run["127.0.0.1", 6379]
 
 Connect using redis-cli:
 
